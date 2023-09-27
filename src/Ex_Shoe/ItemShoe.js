@@ -18,7 +18,14 @@ export default class ItemShoe extends Component {
           <div className="card-body">
             <h4 className="card-title">{this.convertNameShoe(name)}</h4>
             <p className="card-text">Body</p>
-            <button className="btn btn-info mr-2">View</button>
+            <button
+              onClick={() => {
+                this.props.handleViewDetail(this.props.item);
+              }}
+              className="btn btn-info mr-2"
+            >
+              View
+            </button>
             <button
               onClick={() => {
                 this.props.handleAddToCart(this.props.item);

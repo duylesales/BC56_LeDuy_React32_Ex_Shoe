@@ -39,6 +39,10 @@ export default class extends Component {
     // Thống báo xoá thành công
     message.success("Xoá thành công");
   };
+  handleViewDetail = (shoe) => {
+    this.setState({ detail: shoe });
+  };
+  handleChangeQuantity = (id, option) => {};
   render() {
     return (
       <div>
@@ -47,7 +51,11 @@ export default class extends Component {
             <Cart handleRemove={this.handleRemove} cart={this.state.cart} />
           </div>
           <div className="col-6">
-            <ListShoe handleBuy={this.handleAdd} list={this.state.shoeArr} />
+            <ListShoe
+              handleViewDetail={this.handleViewDetail}
+              handleBuy={this.handleAdd}
+              list={this.state.shoeArr}
+            />
           </div>
         </div>
         <DetailShoe detail={this.state.detail} />

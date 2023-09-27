@@ -6,6 +6,7 @@ export default class ListShoe extends Component {
     return this.props.list.map((item, index) => {
       return (
         <ItemShoe
+          handleViewDetail={this.props.handleViewDetail}
           handleAddToCart={this.props.handleBuy}
           item={item}
           key={index}
