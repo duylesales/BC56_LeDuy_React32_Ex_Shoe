@@ -48,9 +48,9 @@ export default class extends Component {
           </div>
           <div className="col-6">
             <ListShoe handleBuy={this.handleAdd} list={this.state.shoeArr} />
-            <DetailShoe />
           </div>
         </div>
+        <DetailShoe detail={this.state.detail} />
       </div>
     );
   }
