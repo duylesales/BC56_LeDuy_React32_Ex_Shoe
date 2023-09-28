@@ -42,13 +42,30 @@ export default class extends Component {
   handleViewDetail = (shoe) => {
     this.setState({ detail: shoe });
   };
-  handleChangeQuantity = (id, option) => {};
+  handleChangeQuantity = (shoeId, option) => {
+    let cloneCart = [...this.state.cart];
+    let index = cloneCart.findIndex((item) => item.id === shoeId);
+    if (option === 0) {
+      if (cloneCart[index].soLuong > 1) {
+        cloneCart[index].soLuong--;
+      } else {
+        cloneCart.splice(index, 1);
+      }
+    } else {
+      cloneCart[index].soLuong++;
+    }
+    this.setState({ cart: cloneCart });
+  };
   render() {
     return (
       <div>
         <div className="row">
           <div className="col-6">
-            <Cart handleRemove={this.handleRemove} cart={this.state.cart} />
+            <Cart
+              handleChangeQuantity={this.handleChangeQuantity}
+              handleRemove={this.handleRemove}
+              cart={this.state.cart}
+            />
           </div>
           <div className="col-6">
             <ListShoe

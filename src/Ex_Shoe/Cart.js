@@ -13,9 +13,23 @@ export default class Cart extends Component {
             <img width={100} src={item.image} alt="" />
           </td>
           <td>
-            <button className="btn btn-danger">-</button>
+            <button
+              onClick={() => {
+                this.props.handleChangeQuantity(item.id, 0);
+              }}
+              className="btn btn-danger"
+            >
+              -
+            </button>
             <strong>{item.soLuong}</strong>
-            <button className="btn btn-dark">+</button>
+            <button
+              onClick={() => {
+                this.props.handleChangeQuantity(item.id, 1);
+              }}
+              className="btn btn-dark"
+            >
+              +
+            </button>
           </td>
           <td>
             <button
