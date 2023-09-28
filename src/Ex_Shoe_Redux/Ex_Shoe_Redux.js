@@ -5,7 +5,7 @@ import DetailShoe from "./DetailShoe";
 import { shoeArr } from "./data";
 import { message } from "antd";
 
-export default class extends Component {
+export default class Ex_Shoe_Redux extends Component {
   state = {
     // detail, cart
     shoeArr: shoeArr,
