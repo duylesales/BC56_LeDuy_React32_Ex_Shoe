@@ -1,31 +1,55 @@
+import { message } from "antd";
 import { shoeArr } from "../../../Ex_Shoe_Redux/data";
-import { GIAM, TANG } from "./constant";
+import {
+  BUY_SHOE,
+  CHANGE_QUANTITY,
+  REMOVE_SHOE,
+  VIEW_DETAIL,
+} from "../constant/shoe";
 
 let initialState = {
-  soLuong: 1,
   shoeArr: shoeArr,
-  detail: shoeArr[0],
+  detail: shoeArr[3],
   cart: [],
 };
 
 export let shoeReducer = (state = initialState, action) => {
   switch (action.type) {
-    default: {
-      return state;
-    }
-  }
-};
-
-export let demoReduxReducer = (state = initialState, action) => {
-  switch (action.type) {
-    case TANG: {
-      console.log("ok tang");
-      state.soLuong++;
+    case BUY_SHOE: {
+      let cloneCart = [...state.cart];
+      var index = cloneCart.findIndex((item) => {
+        return item.id == action.payload.id;
+      });
+      if (index == -1) {
+        let newShoe = { ...action.payload, soLuong: 1 };
+        cloneCart.push(newShoe);
+      } else {
+        cloneCart[index].soLuong++;
+      }
+      state.cart = cloneCart;
       return { ...state };
     }
-    case GIAM: {
-      state.soLuong = state.soLuong - action.payload;
+    case VIEW_DETAIL: {
+      state.detail = action.payload;
       return { ...state };
+    }
+    case REMOVE_SHOE: {
+      let cloneCart = [...state.cart];
+      let index = cloneCart.findIndex((item) => item.id == action.payload);
+      cloneCart.splice(index, 1);
+      message.success("Xoá thành công");
+      return { ...state, cart: cloneCart };
+      // this.setState({ cart: cloneCart });
+      // Thông báo xoá thành công
+    }
+    case CHANGE_QUANTITY: {
+      let { id, option } = action.payload;
+      let cloneCart = [...state.cart];
+      let index = cloneCart.findIndex((item) => item.id === id);
+      cloneCart[index].soLuong = cloneCart[index].soLuong + option;
+      // Nếu Qty = 0 thì xoá
+      cloneCart[index].soLuong == 0 && cloneCart.splice(index, 1);
+      return { ...state, cart: cloneCart };
     }
     default: {
       return state;

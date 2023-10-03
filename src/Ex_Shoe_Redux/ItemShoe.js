@@ -1,6 +1,9 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
+import { BUY_SHOE, VIEW_DETAIL } from "./redux/constant/shoe";
+import { buyShoeAction } from "./redux/action/shoe";
 
-export default class ItemShoe extends Component {
+class ItemShoe extends Component {
   convertNameShoe = (name) => {
     let maxLength = 12;
     if (name.length > maxLength) {
@@ -28,7 +31,7 @@ export default class ItemShoe extends Component {
             </button>
             <button
               onClick={() => {
-                this.props.handleAddToCart(this.props.item);
+                this.props.handleBuy(this.props.item);
               }}
               className="btn btn-success"
             >
@@ -40,3 +43,19 @@ export default class ItemShoe extends Component {
     );
   }
 }
+
+let mapDispatchToProps = (dispatch) => {
+  return {
+    handleBuy: (shoe) => {
+      dispatch(buyShoeAction(shoe));
+    },
+    handleViewDetail: (shoe) => {
+      let action = {
+        type: VIEW_DETAIL,
+        payload: shoe,
+      };
+      dispatch(action);
+    },
+  };
+};
+export default connect(null, mapDispatchToProps)(ItemShoe);

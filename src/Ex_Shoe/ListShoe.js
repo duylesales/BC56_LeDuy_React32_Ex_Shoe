@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import ItemShoe from "./Ex_Shoe/ItemShoe";
+import ItemShoe from "../Ex_Shoe/ItemShoe";
 
 export default class ListShoe extends Component {
   renderList = () => {

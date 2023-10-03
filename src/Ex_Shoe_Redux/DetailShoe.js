@@ -1,6 +1,7 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 
-export default class DetailShoe extends Component {
+class DetailShoe extends Component {
   render() {
     let { detail } = this.props;
     return (
@@ -10,3 +11,9 @@ export default class DetailShoe extends Component {
     );
   }
 }
+let mapStateToProps = (state) => {
+  return {
+    detail: state.shoe.detail,
+  };
+};
+export default connect(mapStateToProps)(DetailShoe);

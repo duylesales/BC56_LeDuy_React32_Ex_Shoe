@@ -5,10 +5,8 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { Provider } from "react-redux";
 import { combineReducers, createStore } from "redux";
-import {
-  demoReduxReducer,
-  shoeReducer,
-} from "./Ex_Shoe_Redux/redux/reducer/reducer";
+import { shoeReducer } from "./Ex_Shoe_Redux/redux/reducer/reducer";
+import { demoReduxReducer } from "./DemoRedux/redux/reducer/reducer";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 // Tổng hợp các reducer

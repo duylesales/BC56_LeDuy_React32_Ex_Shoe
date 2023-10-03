@@ -1,6 +1,9 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
+import { REMOVE_SHOE } from "./redux/constant/shoe";
+import { changQuantityAction } from "./redux/action/shoe";
 
-export default class Cart extends Component {
+class Cart extends Component {
   renderTbody = () => {
     let { cart, handleRemove } = this.props;
 
@@ -63,3 +66,23 @@ export default class Cart extends Component {
     );
   }
 }
+let mapStateToProps = (state) => {
+  return {
+    cart: state.shoe.cart,
+  };
+};
+let mapDispatchToProps = (dispatch) => {
+  return {
+    handleRemove: (id) => {
+      let action = {
+        type: REMOVE_SHOE,
+        payload: id,
+      };
+      dispatch(action);
+    },
+    handleChangeQuantity: (id, option) => {
+      dispatch(changQuantityAction(id, option));
+    },
+  };
+};
+export default connect(mapStateToProps, mapDispatchToProps)(Cart);
